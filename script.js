@@ -147,7 +147,6 @@ window.addEventListener('mousemove', (e) => {
     cursorDot.style.left = `${posX}px`;
     cursorDot.style.top = `${posY}px`;
 
-    // Smooth trailing for outline
     cursorOutline.animate({
         left: `${posX}px`,
         top: `${posY}px`
@@ -155,7 +154,8 @@ window.addEventListener('mousemove', (e) => {
 });
 
 // Hover effects for cursor
-document.querySelectorAll('a, button, .gallery-item, .achievement-item').forEach(link => {
+const hoverElements = document.querySelectorAll('a, button, .gallery-item, .achievement-item, .lightbox-close');
+hoverElements.forEach(link => {
     link.addEventListener('mouseenter', () => {
         cursorOutline.style.width = '60px';
         cursorOutline.style.height = '60px';
@@ -166,6 +166,16 @@ document.querySelectorAll('a, button, .gallery-item, .achievement-item').forEach
         cursorOutline.style.height = '40px';
         cursorOutline.style.backgroundColor = 'transparent';
     });
+});
+
+// Fix cursor on lightbox close (turns red)
+lightboxClose.addEventListener('mouseenter', () => {
+    cursorOutline.style.borderColor = '#ff3333';
+    cursorOutline.style.backgroundColor = 'rgba(255, 51, 51, 0.1)';
+});
+lightboxClose.addEventListener('mouseleave', () => {
+    cursorOutline.style.borderColor = 'var(--primary)';
+    cursorOutline.style.backgroundColor = 'transparent';
 });
 
 // ===== 6. 3D TILT EFFECT =====
